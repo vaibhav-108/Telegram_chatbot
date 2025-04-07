@@ -1,4 +1,4 @@
 python-dotenv
-aiogram==2.5
-openai==0.28.1
+aiogram==3.19.0
+openai==1.70.0
 deepseek==1.0.0
