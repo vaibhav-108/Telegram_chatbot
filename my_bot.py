@@ -12,19 +12,13 @@ import deepseek
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
-# OPENAI_API_KEY= os.getenv("OPENAI_API_KEY")
+
 
 
 
 # Connect with OpenAI
-# openai.api_key = OPENAI_API_KEY
 deepseek.api= DEEPSEEK_API_KEY
-
-
-
 # print(f"deepseek api {DEEPSEEK_API_KEY}")
-
-# MODEL_NAME = "gpt-3.5-turbo"
 MODEL_NAME = "deepseek/deepseek-r1:free"
 
 #Initialize bot 
@@ -42,8 +36,6 @@ reference = Reference()
 
 def clear_past():
     reference.response = ""
-
-
 
 
 @dispatcher.message(Command('clear'))
@@ -105,21 +97,7 @@ async def main_bot(message: types.Message):
             {"role": "user", "content": message.text} #our query 
         ]
     )
-
-    # client = openai(
-    # base_url="https://openrouter.ai/api/v1",
-    # api_key=DEEPSEEK_API_KEY
-    # )
-
-    # response = deepseek.DeepSeekAPI.chat_completion()
-    # model=MODEL_NAME,
-    # messages=[
-    #    {"role": "assistant", "content": reference.response}, # role assistant
-    #    {"role": "user", "content": message.text} #our query 
-    #     ]
-    # )
-
-
+    
     reference.response = response.choices[0].message.content
     print(f">>> chatGPT: \n\t{reference.response}")
     await bot.send_message(chat_id = message.chat.id, text = reference.response)
